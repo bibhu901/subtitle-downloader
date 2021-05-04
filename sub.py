@@ -3,7 +3,7 @@ import glob
 from pythonopensubtitles.opensubtitles import OpenSubtitles
 from pythonopensubtitles.utils import File
 ost = OpenSubtitles() 
-ost.login(input('apna username:  '), input('apna password: '))
+ost.login(input('Username:  '), input('Password: '))
 
 # changing type of slash depending on os.name for usability in windows and other operating systems.
 
@@ -63,9 +63,9 @@ def downloader(file_list, search):
                 data = ost.search_subtitles([{'sublanguageid': 'all', 'query': file_path}])        # uses file name to search for subs and stores sub data in a list.
             
             if data == []:
-                print('Could not find sub in opensubtitle.org or opensubtitles.org whatever...')    # if sub not found data will be empty
-                                                                                                    # file path and name will be adden to a dict as values and keys 
-                if search == 'query':                                                               # respectively for hash search, and only name to a list for name search
+                print('Could not find sub in opensubtitles.org')    # if sub not found data will be empty
+                                                                    # file path and name will be adden to a dict as values and keys 
+                if search == 'query':                               # respectively for hash search, and only name to a list for name search
                     newlist.append(fname[1])
                 
                 elif search == 'hash':
@@ -88,7 +88,7 @@ def downloader(file_list, search):
                     sub = file_root + s + str(id_subtitle_file) + '.srt'
                     
                     if os.path.exists(sub) == False:                # debugging to check if download failed
-                        print("Probably subtitle downloading limit reached.")
+                        print("Probably subtitle downloading limit reached(for the account).")
 
                     try:
                         rename_file(file_root, id_subtitle_file, fname)
@@ -102,25 +102,25 @@ def get_subtitles(movie_folder):
     # file_list stores the file paths of all *.xxx extensions by searching recursively in given directory using glob module
 
     file_list = list(glob.iglob(movie_folder + s + "**" + s + "*.mp4",recursive = True)) + list(glob.iglob(movie_folder + s + "**" + s + "*.mkv",recursive = True)) + list(glob.iglob(movie_folder + s + "**" + s + "*.flv",recursive = True))
-    print(file_list, '\n\n i will add some bulshitt here just becoz i can.')
+    print(file_list)
     
     downloader(file_list, 'hash')           
 
     if list(nfdict.keys()) == []:
-        print('\n\n\nsubtitles for all files were found... smiley emoji smily emoji.\n\n')
+        print('\n\n\nsubtitles for all files were found....\n\n')
     
     else:
-        print('\n\n\nsub for these files could not be found so watch without any for once bakayaro: ')
+        print('\n\n\nsub for these files could not be found: ')
         print(list(nfdict.keys()), '\n\n')
 
-    if input("well.... if u r that desperate for subs i could try to search them by name \nbut its unreliable...., still wanna continue?? Y/N : ")[0].lower() == 'y':
+    if input("well.... if u r that desperate for subs i could try to search them by name \nbut its not as accurate...., still wanna continue?? Y/N : ")[0].lower() == 'y':
         downloader(list(nfdict.keys()), 'query')                        # search by name
 
     if newlist == []:
-        print('\n\n\nsubtitles for all files were found... smiley emoji smily emoji.\n\n') 
+        print('\n\n\nsubtitles for all files were found....\n\n') 
     
     else:
-        print('\n\n\nthese are hopeless cases search on ur own angry emoji angry emoji: ')
+        print('\n\n\nthese are hopeless cases search on ur own: ')
         print(newlist, '\n\n')
 
     if input("want movie suggestion?? Y/N : ")[0].lower() == 'y':
@@ -128,7 +128,7 @@ def get_subtitles(movie_folder):
         print(*goodmv1, sep = '\n')
         print('\nThese are some watchable movies with imdb rating 7-8: \n\n')
         print(*avgmv1, sep = '\n')
-        print('\nThese are some tatti movies (according to imdb not me) rating < 7: \n\n')
+        print('\nThese are some avg/below-avg movies (according to imdb not me) rating < 7: \n\n')
         print(*tmv1, sep = '\n')
         
 get_subtitles(input('path of the movie folder: '))
