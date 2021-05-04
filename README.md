@@ -34,5 +34,7 @@ Also input yes/no to see suggestion for movies in path based on imdb rating.
 I would love it if you can contribute to make this project better. Here's how you can do it:
 
 Fork the project.
+
 Commit changes or bugfixes to your repo.
+
 Submit a pull request
