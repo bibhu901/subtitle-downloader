@@ -17,5 +17,17 @@ Shows names of file whose sub couldn't be found even after name search.
 
 If sub with same name(as file) exists skips file.
 
+# Usage:
+Download sub.py file which can be run on both windows and other os(like linux).
+
+Download sub.exe file for windows os.
+
+Input username and password after creating an account in opensubtitles.org .
+
+Copy adress of path where movies/tv-series are stored and paste in input.
+
+The srt files will be created next to your movie files.
+
+Also input yes/no to see suggestion for movies in path based on imdb rating.
 
 
