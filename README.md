@@ -15,7 +15,7 @@ Shows names of files whose sub couldn't be found and asks user if they want to c
 
 Shows names of file whose sub couldn't be found even after name search.
 
-If sub with same name(as file) exists skips file.
+If sub with same name(as file) exists skips downloading file unnecessarily.
 
 # Usage:
 Download sub.py file which can be run on both windows and other os(like linux).
