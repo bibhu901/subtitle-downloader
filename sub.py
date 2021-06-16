@@ -30,17 +30,18 @@ def rename_file(file_root, id_subtitle_file, fname):
 # this function separates movies based on their imdb rating into 3 lists.
 
 def imdb_rating(gmvlst, avgmvlst, tmvlst, data, fname):
-    imdb = float(data[0].get('MovieImdbRating'))
-    
-    
-    if imdb >= 8:
-        gmvlst.append(fname[1] + ' :   {}'.format(str(imdb)))
-    
-    elif 7 < imdb and imdb < 8:
-        avgmvlst.append(fname[1] + ' :   {}'.format(str(imdb)))
-    
-    else:
-        tmvlst.append(fname[1] + ' :   {}'.format(str(imdb)))
+    if data[0].get('MovieImdbRating') != "":
+        imdb = float(data[0].get('MovieImdbRating'))
+        
+        
+        if imdb >= 8:
+            gmvlst.append(fname[1] + ' :   {}'.format(str(imdb)))
+        
+        elif 7 < imdb and imdb < 8:
+            avgmvlst.append(fname[1] + ' :   {}'.format(str(imdb)))
+        
+        else:
+            tmvlst.append(fname[1] + ' :   {}'.format(str(imdb)))
 
 def downloader(file_list, search):
 
@@ -74,6 +75,8 @@ def downloader(file_list, search):
                 continue
             
             else:
+                #print("\n\n\n\n check check \n\n ")
+                #print(data)
                 id_subtitle_file = data[0].get('IDSubtitleFile')    # gets sub id (a 6 digit num)
                 #print(data)
                 imdb_rating(goodmv1, avgmv1, tmv1, data, fname)
@@ -113,15 +116,15 @@ def get_subtitles(movie_folder):
         print('\n\n\nsub for these files could not be found: ')
         print(list(nfdict.keys()), '\n\n')
 
-    if input("well.... if u r that desperate for subs i could try to search them by name \nbut its not as accurate...., still wanna continue?? Y/N : ")[0].lower() == 'y':
-        downloader(list(nfdict.keys()), 'query')                        # search by name
+        if input("well.... if u r that desperate for subs i could try to search them by name \nbut its not as accurate...., still wanna continue?? Y/N : ")[0].lower() == 'y':
+            downloader(list(nfdict.keys()), 'query')                        # search by name
 
-    if newlist == []:
-        print('\n\n\nsubtitles for all files were found....\n\n') 
-    
-    else:
-        print('\n\n\nthese are hopeless cases search on ur own: ')
-        print(newlist, '\n\n')
+        if newlist == []:
+            print('\n\n\nsubtitles for all files were found....\n\n') 
+        
+        else:
+            print('\n\n\nthese are hopeless cases search on ur own: ')
+            print(newlist, '\n\n')
 
     if input("want movie suggestion?? Y/N : ")[0].lower() == 'y':
         print('\nThese are some good movies with imdb rating > 8: \n\n')
