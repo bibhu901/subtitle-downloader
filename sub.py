@@ -48,10 +48,10 @@ def downloader(file_list, search):
         for file_path in file_list:
 
             if search == 'hash':                                        
-                fname = os.path.split(file_path)                    # fname stores file name and root directory path in a tuple
+                fname = os.path.split(file_path)                    # fname stores root directory path and file name in a tuple
                 #print('fname', '      ', fname)
                 file_root = fname[0]                                             
-                print('some more bs', file_root, '\n', file_path)
+                #print('something ', file_root, '\n', file_path)
                 f = File(file_path)                                 # File class has methods to get hash and size of file
                 data = ost.search_subtitles([{'sublanguageid': 'all', 'moviehash': f.get_hash(), 'moviebytesize': f.size}])     # this method stores multiple subtitle's data in a list in multiple dictionaries using file hash and size.
                                                                                                                                 # data stores hash, size ,imdbrating, and much more
@@ -59,13 +59,13 @@ def downloader(file_list, search):
                 fname = os.path.split(nfdict[file_path])            
                 #print('fname', '      ', fname)
                 file_root = fname[0]
-                print('some more bs', file_root, '\n', file_path)
+                #print('something ', file_root, '\n', file_path)
                 print('file root:  ', file_root)
                 data = ost.search_subtitles([{'sublanguageid': 'all', 'query': file_path}])        # uses file name to search for subs and stores sub data in a list.
             
             if data == []:
                 print('Could not find sub in opensubtitles.org')    # if sub not found data will be empty
-                                                                    # file path and name will be adden to a dict as values and keys 
+                                                                    # file path and name will be added to a dict as values and keys 
                 if search == 'query':                               # respectively for hash search, and only name to a list for name search
                     newlist.append(fname[1])
                 
@@ -83,7 +83,7 @@ def downloader(file_list, search):
                 newsub = file_root + s + fname[1][:-4] + '.srt'     # a string with the name of the final sub file
                                                                     # used below to check if file already exists.
                 if os.path.exists(newsub):
-                    print("sub for this exists so i don't think downloading it again will do shit....")
+                    print("sub for this exists....")
                     continue
                 
                 else:                                               # downloads subtitles using sub id from data and stores sub in output dir.
